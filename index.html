@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nk Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ddeffd 0%, #c5e7fa 100%);
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .container {
+      max-width: 900px;
+      margin: 3rem auto;
+      padding: 2rem 1rem;
+      background: #f7fbffcc;
+      border-radius: 2rem;
+      box-shadow: 0 8px 32px rgba(52,152,219,0.15);
+    }
+    h2 {
+      text-align: center;
+      color: #217dbb;
+      margin-bottom: 1.2rem;
+      font-size: 2rem;
+    }
+    .box-list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .content-box {
+      display: none;
+      width: 96%;
+      max-width: 450px;
+      margin: 1.5rem auto;
+      background: linear-gradient(120deg, #e3f6ff 70%, #d8eaf8 100%);
+      box-shadow: 0 8px 20px rgba(52,152,219,0.07);
+      border-radius: 22px;
+      border: 1.5px solid #cfe2f3;
+      padding: 2rem 1.7rem 1.7rem 1.7rem;
+      position: relative;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      box-sizing: border-box;
+      animation: popIn .7s;
+      transition: transform .18s, box-shadow .18s;
+    }
+    .content-box.visible {
+      display: block;
+      max-width: 900px;
+      padding: 0;
+      background: none;
+      border: none;
+      box-shadow: none;
+      margin: 0 auto 2rem auto;
+    }
+    .content-title {
+      font-size: 1.38em;
+      color: #217dbb;
+      font-weight: bold;
+      margin-bottom: 0.5em;
+      letter-spacing: 0.01em;
+      text-shadow: 0 2px 8px #ffffff77;
+      word-break: break-word;
+    }
+    .content-message {
+      color: #1a5276;
+      font-size: 1.06em;
+      line-height: 1.6;
+      margin-bottom: 0.1em;
+      word-break: break-word;
+    }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.95);}
+      to { opacity: 1; transform: scale(1);}
+    }
+    .notfound {
+      text-align: center;
+      color: #b71c1c;
+      background: #fff3f1;
+      border-radius: 12px;
+      margin: 2em auto 1em auto;
+      font-size: 1.2em;
+      padding: 2em 1em;
+      display: none;
+    }
+    /* Allow main content full width for id1 */
+    .content-box#id1.visible {
+      padding: 0;
+      background: none;
+      border: none;
+      box-shadow: none;
+      max-width: 1000px;
+    }
+    .content-box#id1.visible main {
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 8px 32px rgba(52,152,219,0.13);
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🔹 Notes by Nk</h2>
+    <div class="box-list" id="boxContainer"></div>
+    <div id="notFound" class="notfound">
+      No note found for this ID.<br>
+      (Check your hash or ask the Nk!)
+    </div>
+  </div>
+  <script>
+    // --- EDIT THIS ARRAY: Each object is a box ---
+    // id: hash (without #), title: visible title, html: content (HTML allowed)
+    const notes = [
+      {
+        id: "id1",
+        title: "Mechanism",
+        html: `
+<main>
+  <h1>Comprehensive Guide: Free Body Diagrams (FBDs)</h1>
+  <div class="section">
+    <h2>1. What is a Free Body Diagram?</h2>
+    <p>
+      <span class="highlight">A Free Body Diagram (FBD)</span> is a graphical illustration used in physics and engineering to visualize the applied forces, moments, and reactions acting on a single object or system. It is a cornerstone tool in the analysis of statics, dynamics, and mechanics of materials.
+    </p>
+    <ul>
+      <li><strong>Purpose:</strong> To isolate a body and represent all external forces and moments acting on it, making it easier to apply equilibrium equations.</li>
+      <li><strong>Applications:</strong> Statics, dynamics, structural analysis, mechanical design, GATE/IES/PSU exams, and real-world engineering problems.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>2. Types of Forces in FBDs</h2>
+    <dl class="def-list">
+      <dt>1. Applied Force (<span class="eqn">F</span> or <span class="eqn">P</span>)</dt>
+      <dd>Any external force applied to the body, such as a push, pull, or tension.</dd>
+      <dt>2. Gravitational Force (<span class="eqn">W = mg</span>)</dt>
+      <dd>Weight of the body, always acts vertically downward towards the center of the Earth.</dd>
+      <dt>3. Normal Reaction (<span class="eqn">N</span>)</dt>
+      <dd>Perpendicular contact force from a surface supporting the body; acts away from the surface.</dd>
+      <dt>4. Frictional Force (<span class="eqn">f = \\mu N</span>)</dt>
+      <dd>Resists relative motion between surfaces; acts parallel to the plane of contact and opposite to the direction of motion or intended motion.</dd>
+      <dt>5. Tension (<span class="eqn">T</span>)</dt>
+      <dd>Force transmitted through a string, rope, or cable when pulled tight by forces acting from opposite ends.</dd>
+      <dt>6. Spring Force (<span class="eqn">F_s = kx</span>)</dt>
+      <dd>Force exerted by a compressed or stretched spring, proportional to the displacement from equilibrium.</dd>
+      <dt>7. Reaction at Supports</dt>
+      <dd>For beams or structures: <b>Hinges</b> provide two reactions, <b>Rollers</b> provide one normal reaction, <b>Fixed supports</b> provide two force reactions and a moment.</dd>
+      <dt>8. Moment or Couple (<span class="eqn">M = F \\times d</span>)</dt>
+      <dd>Tendency of a force to rotate a body about a point or axis.</dd>
+    </dl>
+  </div>
+
+  <div class="section">
+    <h2>3. How to Draw an FBD (Step-by-Step)</h2>
+    <ol>
+      <li><b>Isolate the body:</b> Remove the object from its surroundings.</li>
+      <li><b>Replace supports/connections</b> with their reaction forces and moments.</li>
+      <li><b>Show all applied forces:</b> Include weight, applied loads, friction, tension, etc.</li>
+      <li><b>Indicate line of action and direction</b> for every force.</li>
+      <li><b>Label all known & unknown forces</b> clearly.</li>
+      <li><b>Draw a neat, proportionate sketch</b> for clarity and calculations.</li>
+    </ol>
+  </div>
+
+  <div class="section">
+    <h2>4. Common FBD Scenarios & CSS Diagrams</h2>
+    <div class="diagram-section">
+      <!-- Block on horizontal surface -->
+      <div class="diagram-card">
+        <div class="diagram-title">Block on Horizontal Surface</div>
+        <div class="fbd-css-diagram" id="fbd1">
+          <div class="ground"></div>
+          <div class="block-shadow"></div>
+          <div class="block"></div>
+          <div class="arrow arrow-w"></div>
+          <div class="arrow arrow-n"></div>
+          <div class="arrow arrow-f"></div>
+          <div class="arrow arrow-p"></div>
+          <span class="label-w">W</span>
+          <span class="label-n">N</span>
+          <span class="label-f">f</span>
+          <span class="label-p">P</span>
+        </div>
+        <div class="diagram-desc">P: Applied force<br>N: Normal reaction<br>W: Weight<br>f: Friction</div>
+      </div>
+      <!-- Block on Inclined Plane -->
+      <div class="diagram-card">
+        <div class="diagram-title">Block on Inclined Plane</div>
+        <div class="fbd-css-diagram" id="fbd2">
+          <div class="inclined-plane"></div>
+          <div class="block-incline"></div>
+          <div class="arrow arrow-w2"></div>
+          <div class="arrow arrow-n2"></div>
+          <div class="arrow arrow-f2"></div>
+          <div class="arrow arrow-p2"></div>
+          <span class="label-w2">W</span>
+          <span class="label-n2">N</span>
+          <span class="label-f2">f</span>
+          <span class="label-p2">P</span>
+        </div>
+        <div class="diagram-desc">Block of mass m on incline θ.<br>
+          W: Weight <br>
+          N: Normal reaction <br>
+          f: Friction (down the incline if block tends to move up) <br>
+          P: Applied force (up the incline)</div>
+      </div>
+      <!-- Pulley System -->
+      <div class="diagram-card">
+        <div class="diagram-title">Simple Pulley System</div>
+        <div class="fbd-css-diagram" id="fbd3">
+          <div class="pulley"></div>
+          <div class="pulley-rope-l"></div>
+          <div class="pulley-rope-r"></div>
+          <div class="pulley-block-l"></div>
+          <div class="pulley-block-r"></div>
+          <div class="arrow arrow-pulley-wl"></div>
+          <div class="arrow arrow-pulley-wr"></div>
+          <div class="arrow arrow-pulley-tl"></div>
+          <div class="arrow arrow-pulley-tr"></div>
+          <span class="label-pulley-wl">W₁</span>
+          <span class="label-pulley-wr">W₂</span>
+          <span class="label-pulley-tl">T</span>
+          <span class="label-pulley-tr">T</span>
+        </div>
+        <div class="diagram-desc">Two masses m₁, m₂ connected via a pulley.<br>
+          W₁, W₂: Weights<br>
+          T: Tension in rope</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>5. Equilibrium Equations</h2>
+    <ul>
+      <li>For a rigid body in <b>2D equilibrium</b>:
+        <div class="eqn">∑Fₓ = 0</div>
+        <div class="eqn">∑Fᵧ = 0</div>
+        <div class="eqn">∑M_z = 0</div>
+      </li>
+      <li>For a rigid body in <b>3D equilibrium</b>:
+        <div class="eqn">∑Fₓ = 0</div>
+        <div class="eqn">∑Fᵧ = 0</div>
+        <div class="eqn">∑F_z = 0</div>
+        <div class="eqn">∑Mₓ = 0</div>
+        <div class="eqn">∑Mᵧ = 0</div>
+        <div class="eqn">∑M_z = 0</div>
+      </li>
+    </ul>
+    <p>
+      <b>To solve FBD problems:</b> Write equilibrium equations, substitute known values, and solve for unknowns such as reactions, tensions, or applied forces.
+    </p>
+  </div>
+
+  <div class="section">
+    <h2>6. Example Problems & Solutions</h2>
+    <!-- Example 1 -->
+    <div class="sol-section">
+      <div class="sol-title">Example 1: Block on a Horizontal Surface with Friction</div>
+      <div class="step"><b>Problem:</b> A block of mass 20 kg rests on a rough horizontal surface (μ = 0.25). What minimum horizontal force P is required to just start moving the block?</div>
+      <div class="step"><b>Solution:</b></div>
+      <div class="step">1. <b>Draw FBD:</b> Forces are Weight W (down), Normal N (up), Friction f (left), Applied force P (right).</div>
+      <div class="step">2. <b>Equilibrium in Y:</b>
+        <span class="eqn">N - W = 0 ⇒ N = W = mg = 20 × 9.81 = 196.2 N</span>
+      </div>
+      <div class="step">3. <b>Friction force:</b>
+        <span class="eqn">f = μN = 0.25 × 196.2 = 49.05 N</span>
+      </div>
+      <div class="step">4. <b>Equilibrium in X:</b>
+        <span class="eqn">P = f = 49.05 N</span>
+      </div>
+      <div class="step"><b>Answer:</b> The minimum force P required = <b>49.05 N</b></div>
+    </div>
+    <!-- Example 2 -->
+    <div class="sol-section">
+      <div class="sol-title">Example 2: Block on Inclined Plane</div>
+      <div class="step"><b>Problem:</b> Block of mass 10 kg on a 30° incline, μ = 0.2. What force P parallel to the incline is needed to move it up at constant speed?</div>
+      <div class="step">1. <b>Draw FBD:</b> Forces along and perpendicular to incline: Weight W, Normal N, Friction f, Applied force P.</div>
+      <div class="step">2. <b>Resolve W:</b>
+        <span class="eqn">W = mg = 98.1 N</span>.
+        <span class="eqn">Wₓ = W sinθ = 98.1 × 0.5 = 49.05 N</span> (down the incline).
+        <span class="eqn">Wᵧ = W cosθ = 98.1 × 0.866 = 84.96 N</span> (perpendicular to plane).
+      </div>
+      <div class="step">3. <b>Normal reaction:</b>
+        <span class="eqn">N = Wᵧ = 84.96 N</span>
+      </div>
+      <div class="step">4. <b>Friction:</b>
+        <span class="eqn">f = μN = 0.2 × 84.96 = 16.99 N</span>
+      </div>
+      <div class="step">5. <b>Equilibrium along incline:</b>
+        <span class="eqn">P = Wₓ + f = 49.05 + 16.99 = 66.04 N</span>
+      </div>
+      <div class="step"><b>Answer:</b> The force required <b>P = 66.04 N</b></div>
+    </div>
+    <!-- Example 3 -->
+    <div class="sol-section">
+      <div class="sol-title">Example 3: Pulley System</div>
+      <div class="step"><b>Problem:</b> Two masses, m₁ = 5 kg and m₂ = 3 kg, suspended on either side of a frictionless, massless pulley. Find the acceleration and tension in the string.</div>
+      <div class="step"><b>Solution:</b>
+        <ul>
+          <li><b>FBD for m₁:</b> T (up), W₁ = m₁g (down)</li>
+          <li><b>FBD for m₂:</b> T (up), W₂ = m₂g (down)</li>
+        </ul>
+        <div class="eqn">m₁g - T = m₁a</div>
+        <div class="eqn">T - m₂g = m₂a</div>
+      </div>
+      <div class="step">Add equations:
+        <div class="eqn">m₁g - m₂g = (m₁ + m₂)a</div>
+        <div class="eqn">a = (m₁ - m₂)g / (m₁ + m₂) = (5-3)×9.81 / (5+3) = 2.45 m/s²</div>
+      </div>
+      <div class="step">Tension:
+        <div class="eqn">T = m₂(g + a) = 3 × (9.81 + 2.45) = 36.78 N</div>
+      </div>
+      <div class="step"><b>Answers:</b> Acceleration = <b>2.45 m/s²</b>, Tension = <b>36.78 N</b></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>7. Advanced Tips & Common Mistakes</h2>
+    <ul>
+      <li>Always draw FBD before writing equations.</li>
+      <li>For unknown support reactions, assume direction; negative value only means opposite direction.</li>
+      <li>For multiple bodies, draw separate FBDs for each.</li>
+      <li>Show all forces acting <b>on the body</b>, not forces the body exerts on others.</li>
+      <li>Include all action-reaction pairs for interconnected bodies.</li>
+      <li>For equilibrium, do not forget to consider moments about a point.</li>
+    </ul>
+  </div>
+</main>
+        `
+      },
+      {
+        id: "id2",
+        title: "Matter",
+        html: "This is the content for Matter. Add your explanation, examples, or links."
+      },
+      {
+        id: "id3",
+        title: "Energy",
+        html: "This is the content for Energy.<br><img src='https://placehold.co/120x60/99e/fff?text=Energy' alt='Energy'>"
+      },
+      {
+        id: "id100",
+        title: "Special Topic",
+        html: "This is a custom note for #id100."
+      },
+      {
+        id: "secret1",
+        title: "Secret",
+        html: "This is a secret note originally with refer check, now displayed without any ref check."
+      }
+    ];
+
+    // --- Render all boxes (hidden by default, id is NOT shown in content) ---
+    const container = document.getElementById('boxContainer');
+    container.innerHTML = notes.map(note => `
+      <div id="${note.id}" class="content-box">
+        <div class="content-title">${note.title}</div>
+        <div class="content-message">${note.html}</div>
+      </div>
+    `).join('');
+
+    // --- Show only box matching hash ---
+    function updateVisibility() {
+      const hash = window.location.hash.replace(/^#/, "");
+      let found = false;
+      notes.forEach(note => {
+        const el = document.getElementById(note.id);
+        if (el) {
+          if (hash === note.id) {
+            el.classList.add('visible');
+            found = true;
+          } else {
+            el.classList.remove('visible');
+          }
+        }
+      });
+      document.getElementById('notFound').style.display = (hash && !found) ? '' : 'none';
+    }
+    window.addEventListener('hashchange', updateVisibility);
+    window.addEventListener('DOMContentLoaded', updateVisibility);
+  </script>
+</body>
+</html>
