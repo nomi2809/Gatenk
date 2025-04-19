@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Nk Gate Notes</title>
+  <title>Nk Notes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
@@ -13,7 +13,7 @@
     }
     .container {
       max-width: 900px;
-      margin: 2rem auto;
+      margin: 3rem auto;
       padding: 2rem 1rem;
       background: #f7fbffcc;
       border-radius: 2rem;
@@ -23,41 +23,7 @@
       text-align: center;
       color: #217dbb;
       margin-bottom: 1.2rem;
-      font-size: 2.1rem;
-    }
-    .info {
-      background: #e3f2fd;
-      color: #1769aa;
-      border-left: 5px solid #90caf9;
-      padding: 1em 1.5em;
-      border-radius: 12px;
-      margin: 0 auto 1.5em auto;
-      max-width: 600px;
-      font-size: 1.1em;
-      text-align: center;
-    }
-    .hash-nav {
-      text-align: center;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      gap: 0.5em;
-    }
-    .jump-btn {
-      display: inline-block;
-      margin: 0.2em 0.25em;
-      padding: 0.48em 1.2em;
-      border: none;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #5dade2 40%, #a9c9f6 100%);
-      color: #fff;
-      font-weight: bold;
-      font-size: 1em;
-      cursor: pointer;
-      transition: background 0.2s, box-shadow 0.2s;
-      box-shadow: 0 2px 6px rgba(52,152,219,0.10);
-    }
-    .jump-btn:hover {
-      background: linear-gradient(90deg, #217dbb 40%, #85c1e9 100%);
+      font-size: 2rem;
     }
     .box-list {
       display: flex;
@@ -65,42 +31,54 @@
       align-items: center;
       width: 100%;
     }
-    @media (min-width: 700px) {
-      .box-list { flex-direction: row; flex-wrap: wrap; justify-content: center; }
-    }
     .content-box {
       display: none;
       width: 96%;
-      max-width: 400px;
-      min-height: 130px;
-      margin: 1.2rem;
+      max-width: 450px;
+      margin: 1.5rem auto;
       background: linear-gradient(120deg, #e3f6ff 70%, #d8eaf8 100%);
       box-shadow: 0 8px 20px rgba(52,152,219,0.07);
-      border-radius: 18px;
+      border-radius: 22px;
       border: 1.5px solid #cfe2f3;
-      transition: transform .18s, box-shadow .18s;
-      padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+      padding: 2rem 1.7rem 1.7rem 1.7rem;
       position: relative;
       overflow: hidden;
       animation: popIn .7s;
+      transition: transform .18s, box-shadow .18s;
     }
     .content-box.visible {
       display: block;
     }
     .content-box:hover {
-      transform: translateY(-3px) scale(1.01);
+      transform: translateY(-2px) scale(1.01);
       box-shadow: 0 16px 32px rgba(52,152,219,0.10);
     }
     .content-id {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      background: #b6e0fb;
+      color: #217dbb;
+      padding: 0.3em 1em;
+      border-radius: 999px;
+      font-size: 1em;
       font-weight: bold;
-      font-size: 1.1em;
-      color: #3498db;
-      margin-bottom: 0.3em;
+      letter-spacing: 1px;
+      box-shadow: 0 2px 6px #a8dadc33;
+    }
+    .content-title {
+      font-size: 1.38em;
+      color: #217dbb;
+      font-weight: bold;
+      margin-bottom: 0.5em;
+      letter-spacing: 0.01em;
+      text-shadow: 0 2px 8px #ffffff77;
     }
     .content-message {
       color: #1a5276;
-      font-size: 1.05em;
+      font-size: 1.06em;
       line-height: 1.6;
+      margin-bottom: 0.1em;
     }
     @keyframes popIn {
       from { opacity: 0; transform: scale(0.95);}
@@ -114,74 +92,68 @@
       margin: 2em auto 1em auto;
       font-size: 1.2em;
       padding: 2em 1em;
+      display: none;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>🔹 All subjects Notes </h2>
-    <dijv class="info">
-      Add <b>#yourID</b> to the URL (<code>mysite.in/page#yourID</code>) to show your note.<br>
-      Or click a button below for a quick jump!
-    </dijv>
-    <div class="hash-nav" id="quickNav"></div>
+    <h2>🔹 Reveal Custom Notes by URL Hash</h2>
     <div class="box-list" id="boxContainer"></div>
-    <div id="notFound" class="notfound" style="display:none">
-      No note found for this ID. Check your hash or contact the owner!
+    <div id="notFound" class="notfound">
+      No note found for this ID.<br>
+      (Check your hash or ask the owner!)
     </div>
   </div>
   <script>
-    // -- YOUR CUSTOM NOTES DATA -- //
-    // You can also load this from a JSON file via fetch('notes.json').then(...)
-    const notes = {
-      "i1": {
-        
-        html: "This is <b>item 1</b>.<br>Welcome! <img src='https://placekitten.com/80/80' style='vertical-align:middle;border-radius:0.5em'>"
+    // --- EDIT THIS ARRAY: Each object is a box ---
+    // id: hash (without #), title: visible title, html: content (HTML allowed)
+    const notes = [
+      {
+        id: "id1",
+        title: "Mechanism",
+        html: "This is the content for Mechanism. You can put any text, images, or HTML here."
       },
-      "item2": {
-        label: "item2",
-        html: "Your special note for <span style='color:#217dbb;font-weight:bold;'>item2</span>.<br><a href='https://github.com' target='_blank'>Go to GitHub</a>"
+      {
+        id: "id2",
+        title: "Matter",
+        html: "This is the content for Matter. Add your explanation, examples, or links."
       },
-      "VIP": {
-        label: "VIP",
-        html: "<b>VIP Guest:</b> 🎉<br>This is a private note for VIP guests only."
+      {
+        id: "id3",
+        title: "Energy",
+        html: "This is the content for Energy.<br><img src='https://placehold.co/120x60/99e/fff?text=Energy' alt='Energy'>"
       },
-      "secret99": {
-        label: "secret99",
-        html: "Shhh... This is a <i>secret</i> note only visible at <code>#secret99</code>."
+      {
+        id: "id100",
+        title: "Special Topic",
+        html: "This is a custom note for #id100."
       },
-      "help": {
-        label: "help",
-        html: "<b>Help Section:</b><br>Contact <a href='mailto:someone@email.com'>support</a> for assistance."
+      {
+        id: "secret1",
+        title: "Secret",
+        html: "This is a secret note originally with refer check, now displayed without any ref check."
       }
-      // Add thousands more as needed!
-    };
+    ];
 
-    // ---- Quick Navigation Buttons (edit as needed) ----
-    const quickNavIds = ["item1", "item2", "VIP", "secret99", "help"];
-    document.getElementById('quickNav').innerHTML =
-      quickNavIds.map(id =>
-        `<button class="jump-btn" onclick="location.hash='${id}'">${id}</button>`
-      ).join('') +
-      `<button class="jump-btn" onclick="location.hash=''">Hide All</button>`;
-
-    // ---- Render All Notes (Hidden) ----
+    // --- Render all boxes (hidden by default) ---
     const container = document.getElementById('boxContainer');
-    container.innerHTML = Object.keys(notes).map(id => `
-      <div id="${id}" class="content-box">
-        <div class="content-id">#${notes[id].label}</div>
-        <div class="content-message">${notes[id].html}</div>
+    container.innerHTML = notes.map(note => `
+      <div id="${note.id}" class="content-box">
+        <div class="content-id">#${note.id}</div>
+        <div class="content-title">${note.title}</div>
+        <div class="content-message">${note.html}</div>
       </div>
     `).join('');
 
-    // ---- Visibility Logic ----
+    // --- Show only box matching hash ---
     function updateVisibility() {
       const hash = window.location.hash.replace(/^#/, "");
       let found = false;
-      Object.keys(notes).forEach(id => {
-        const el = document.getElementById(id);
+      notes.forEach(note => {
+        const el = document.getElementById(note.id);
         if (el) {
-          if (hash === id) {
+          if (hash === note.id) {
             el.classList.add('visible');
             found = true;
           } else {
