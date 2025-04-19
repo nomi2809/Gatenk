@@ -103,531 +103,461 @@
       {
         id: "id1",
         title: "Mechanism",
-        html: "<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=480, initial-scale=1">
-  <title>Comprehensive Guide: Free Body Diagrams (FBDs)</title>
-  <style>
-    body {
-      background: #f4f8fb;
-      margin: 0;
-      padding: 0;
-      font-family: 'Segoe UI', Arial, sans-serif;
-      color: #23272f;
-      font-size: 16px;
-    }
-    main {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 24px 16px 90px 16px;
-    }
-    h1, h2, h3 {
-      color: #114477;
-      margin-bottom: 0.4em;
-    }
-    h1 {
-      margin-top: 0.5em;
-      font-size: 2.3em;
-      text-align: center;
-      letter-spacing: 1px;
-    }
-    h2 {
-      margin-top: 2.2em;
-      font-size: 1.4em;
-      border-bottom: 1.5px solid #d6e4f0;
-      padding-bottom: 3px;
-    }
-    h3 {
-      margin-top: 1.5em;
-      font-size: 1.13em;
-      color: #1769aa;
-    }
-    .section {
-      margin-bottom: 2.5em;
-    }
-    .highlight {
-      background: #e9f6ff;
-      padding: 0.2em 0.5em;
-      border-radius: 6px;
-    }
-    .def-list {
-      margin-left: 1em;
-    }
-    .def-list dt {
-      font-weight: bold;
-      color: #054a91;
-      margin-top: 1em;
-    }
-    .def-list dd {
-      margin-bottom: 0.6em;
-      margin-left: 0;
-    }
-    .eqn {
-      background: #f3f7fa;
-      padding: 0.15em 0.6em;
-      border-radius: 5px;
-      color: #0c395c;
-      font-family: 'Consolas', monospace;
-      font-size: 1.08em;
-      margin: 0.1em 0.2em;
-      display: inline-block;
-      vertical-align: middle;
-    }
-    /* Diagram Containers */
-    .diagram-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 32px;
-      margin: 32px 0 24px 0;
-      justify-content: center;
-      align-items: flex-start;
-    }
-    .diagram-card {
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 3px 12px rgba(28, 52, 93, 0.09);
-      padding: 20px;
-      width: 390px;
-      min-height: 340px;
-      margin-bottom: 14px;
-      position: relative;
-      transition: box-shadow 0.2s;
-    }
-    .diagram-card:hover {
-      box-shadow: 0 4px 24px rgba(28, 52, 93, 0.16);
-    }
-    .diagram-title {
-      text-align: center;
-      font-weight: bold;
-      color: #2360a4;
-      font-size: 1.08em;
-      margin-bottom: 6px;
-    }
-    .fbd-css-diagram {
-      position: relative;
-      background: #e9ecef;
-      border-radius: 4px;
-      width: 340px;
-      height: 210px;
-      margin: 0 auto 8px auto;
-      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
-    }
-    .diagram-desc {
-      color: #43607e;
-      font-size: 0.96em;
-      text-align: center;
-      margin-bottom: 0;
-      margin-top: 0;
-      min-height: 2.5em;
-    }
-    /* Block on Surface FBD */
-    .block { position:absolute; left:110px; top:85px; width:120px; height:60px;
-      background:#7db6e8; border-radius:6px; border:2.5px solid #4d87ac; z-index: 1;}
-    .ground { position: absolute; left: 60px; top: 145px; width: 220px; height: 0;
-      border-bottom: 3px solid #444; z-index: 0;}
-    .block-shadow {
-      position: absolute; left: 112px; top: 145px; width: 116px; height: 10px;
-      background: rgba(80,80,80,0.11); border-radius: 30% 30% 70% 70% / 50% 50% 90% 90%;
-      z-index: 0;
-    }
-    /* CSS Arrows for FBD */
-    .arrow { position: absolute; width: 0; height: 0;}
-    .arrow-w {
-      left: 167px; top: 145px; border-left: 0 solid transparent;
-      border-right: 0 solid transparent; border-top: 40px solid #c0392b;
-    }
-    .arrow-w::after {
-      content: ""; position: absolute; left: -7px; top: 38px;
-      border-left: 10px solid transparent; border-right: 10px solid transparent;
-      border-top: 16px solid #c0392b;
-    }
-    .label-w {
-      position: absolute; left: 185px; top: 178px; color: #c0392b;
-      font-weight: bold; font-size: 18px; user-select:none;
-    }
-    .arrow-n {
-      left: 177px; top: 83px; border-left: 0 solid transparent;
-      border-right: 0 solid transparent; border-bottom: 32px solid #27ae60;
-    }
-    .arrow-n::after {
-      content: ""; position: absolute; left: -7px; top: -17px;
-      border-left: 10px solid transparent; border-right: 10px solid transparent;
-      border-bottom: 16px solid #27ae60;
-    }
-    .label-n {
-      position: absolute; left: 195px; top: 85px; color: #27ae60;
-      font-weight: bold; font-size: 18px; user-select:none;
-    }
-    .arrow-f {
-      left: 110px; top: 120px; width: 40px; height: 0;
-      border-bottom: 4px solid #f39c12; transform: rotate(180deg);
-    }
-    .arrow-f::after {
-      content: ""; position: absolute; right: 37px; top: -8px;
-      border-top: 8px solid transparent; border-bottom: 8px solid transparent;
-      border-right: 13px solid #f39c12;
-    }
-    .label-f {
-      position: absolute; left: 75px; top: 108px; color: #f39c12;
-      font-weight: bold; font-size: 18px; user-select:none;
-    }
-    .arrow-p {
-      left: 225px; top: 142px; width: 65px; height: 0;
-      border-bottom: 4px solid #2980b9; transform: rotate(-30deg);
-    }
-    .arrow-p::after {
-      content: ""; position: absolute; right: -12px; top: -8px;
-      border-top: 8px solid transparent; border-bottom: 8px solid transparent;
-      border-left: 16px solid #2980b9; transform: rotate(30deg);
-    }
-    .label-p {
-      position: absolute; left: 295px; top: 112px; color: #2980b9;
-      font-weight: bold; font-size: 18px; user-select:none;
-    }
-    /* FBD for Inclined Plane */
-    .inclined-plane {
-      position: absolute; left: 30px; top: 90px; width: 210px; height: 80px;
-      background: linear-gradient(114deg,#c2d8e9 70%,transparent 70%);
-      border-bottom: 5px solid #34597a;
-      border-right: 5px solid #34597a;
-      transform: skew(-25deg,0deg);
-      z-index: 0;
-    }
-    .block-incline {
-      position: absolute; left: 120px; top: 105px; width: 70px; height: 35px;
-      background: #8fbbe3; border-radius: 5px; border: 2px solid #4d87ac; z-index: 1;
-      transform: skew(-25deg,0deg) rotate(25deg);
-    }
-    /* Inclined FBD Arrows */
-    .arrow-w2 {
-      left: 151px; top: 130px; border-left: 0; border-right: 0; border-top: 55px solid #c0392b;
-    }
-    .arrow-w2::after { content: ""; position: absolute; left: -7px; top: 53px;
-      border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 14px solid #c0392b;
-    }
-    .label-w2 { position: absolute; left: 158px; top: 183px; color: #c0392b; font-weight: bold; font-size: 16px; user-select:none;}
-    .arrow-n2 {
-      left: 180px; top: 120px; width: 0; height: 50px;
-      border-right: 5px solid #27ae60; border-bottom: 0 solid transparent; transform: rotate(-25deg);
-    }
-    .arrow-n2::after {
-      content: ""; position: absolute; left: 2px; top: 0px;
-      border-top: 8px solid transparent; border-bottom: 8px solid transparent;
-      border-left: 13px solid #27ae60; transform: rotate(25deg);
-    }
-    .label-n2 { position: absolute; left: 200px; top: 110px; color: #27ae60; font-weight: bold; font-size: 16px; user-select:none;}
-    .arrow-f2 {
-      left: 180px; top: 134px; width: 45px; height: 0; border-bottom: 4px solid #f39c12; transform: rotate(-25deg);
-    }
-    .arrow-f2::after {
-      content: ""; position: absolute; right: -13px; top: -8px;
-      border-top: 8px solid transparent; border-bottom: 8px solid transparent;
-      border-left: 14px solid #f39c12; transform: rotate(25deg);
-    }
-    .label-f2 { position: absolute; left: 220px; top: 118px; color: #f39c12; font-weight: bold; font-size: 16px; user-select:none;}
-    .arrow-p2 {
-      left: 120px; top: 105px; width: 55px; height: 0; border-bottom: 4px solid #2980b9;
-      transform: rotate(-25deg);
-    }
-    .arrow-p2::after {
-      content: ""; position: absolute; right: -10px; top: -6px;
-      border-top: 8px solid transparent; border-bottom: 8px solid transparent;
-      border-left: 13px solid #2980b9; transform: rotate(25deg);
-    }
-    .label-p2 { position: absolute; left: 110px; top: 90px; color: #2980b9; font-weight: bold; font-size: 16px; user-select:none;}
-    /* FBD for Pulley System */
-    .pulley {
-      position: absolute; left: 160px; top: 35px; width: 40px; height: 40px;
-      border-radius: 50%; border: 6px solid #3b4c6b; background: #e8eaf6; z-index: 1;
-    }
-    .pulley-rope-l { position: absolute; left: 180px; top: 75px; width: 4px; height: 55px; background: #b3b3b3; }
-    .pulley-rope-r { position: absolute; left: 200px; top: 75px; width: 4px; height: 55px; background: #b3b3b3; }
-    .pulley-block-l {
-      position: absolute; left: 170px; top: 130px; width: 18px; height: 32px;
-      background: #7db6e8; border-radius: 4px; border: 2px solid #4d87ac; z-index: 1;
-    }
-    .pulley-block-r {
-      position: absolute; left: 190px; top: 130px; width: 18px; height: 32px;
-      background: #e1ad5d; border-radius: 4px; border: 2px solid #b78a3c; z-index: 1;
-    }
-    .arrow-pulley-wl {
-      left: 178px; top: 162px; border-left: 0; border-right: 0; border-top: 30px solid #c0392b;
-    }
-    .arrow-pulley-wl::after { content: ""; position: absolute; left:-7px; top:28px; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 13px solid #c0392b;}
-    .label-pulley-wl { position:absolute; left:183px; top:192px; color:#c0392b; font-weight:bold; font-size:15px;}
-    .arrow-pulley-wr {
-      left: 198px; top: 162px; border-left: 0; border-right: 0; border-top: 30px solid #c0392b;
-    }
-    .arrow-pulley-wr::after { content: ""; position: absolute; left:-7px; top:28px; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 13px solid #c0392b;}
-    .label-pulley-wr { position:absolute; left:203px; top:192px; color:#c0392b; font-weight:bold; font-size:15px;}
-    .arrow-pulley-tl {
-      left: 185px; top: 130px; width: 0; height: 32px; border-right: 3px solid #1769aa; border-bottom: 0; transform: none;
-    }
-    .arrow-pulley-tl::after {
-      content: ""; position: absolute; right:-7px; top:0px; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 11px solid #1769aa;
-    }
-    .label-pulley-tl { position:absolute; left:167px; top:110px; color:#1769aa; font-weight:bold; font-size:15px;}
-    .arrow-pulley-tr {
-      left: 205px; top: 130px; width: 0; height: 32px; border-right: 3px solid #1769aa; border-bottom: 0; transform: none;
-    }
-    .arrow-pulley-tr::after {
-      content: ""; position: absolute; right:-7px; top:0px; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 11px solid #1769aa;
-    }
-    .label-pulley-tr { position:absolute; left:215px; top:110px; color:#1769aa; font-weight:bold; font-size:15px;}
-    /* Responsive adjustments */
-    @media (max-width: 1000px) {
-      .diagram-section {
-        flex-direction: column;
-        gap: 10px;
-        align-items: center;
-      }
-      main {max-width: 99vw;}
-      .diagram-card {width: 99vw; min-width: 0;}
-    }
-    /* Solution sections */
-    .sol-section {
-      background: #f9fcfe;
-      border-left: 5px solid #3498db;
-      padding: 14px 18px 9px 18px;
-      margin: 18px 0 22px 0;
-      border-radius: 7px;
-      font-size: 1em;
-      color: #1f387a;
-    }
-    .sol-title {
-      color: #24598c;
-      font-weight: bold;
-      margin-bottom: 8px;
-      font-size: 1.05em;
-      border-bottom: 1px solid #d0e4f7;
-      padding-bottom: 2px;
-      letter-spacing: 0.01em;
-    }
-    .step {
-      margin-bottom: 0.7em;
-    }
-    .faded {
-      opacity: 0.6;
-      filter: grayscale(0.3);
-    }
-  </style>
-</head>
-<body>
-<main>
-  <h1>Comprehensive Guide: Free Body Diagrams (FBDs)</h1>
-  <div class="section">
-    <h2>1. What is a Free Body Diagram?</h2>
-    <p>
-      <span class="highlight">A Free Body Diagram (FBD)</span> is a graphical illustration used in physics and engineering to visualize the applied forces, moments, and reactions acting on a single object or system. It is a cornerstone tool in the analysis of statics, dynamics, and mechanics of materials.
-    </p>
-    <ul>
-      <li><strong>Purpose:</strong> To isolate a body and represent all external forces and moments acting on it, making it easier to apply equilibrium equations.</li>
-      <li><strong>Applications:</strong> Statics, dynamics, structural analysis, mechanical design, GATE/IES/PSU exams, and real-world engineering problems.</li>
-    </ul>
-  </div>
+        html: "
+<style>
+  #id1 .fbd-section {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #23272f;
+  }
+  #id1 .fbd-section h2, #id1 .fbd-section h3 {
+    color: #114477;
+    margin-bottom: 0.4em;
+  }
+  #id1 .fbd-section h2 {
+    margin-top: 2.2em;
+    font-size: 1.4em;
+    border-bottom: 1.5px solid #d6e4f0;
+    padding-bottom: 3px;
+  }
+  #id1 .fbd-section h3 {
+    margin-top: 1.5em;
+    font-size: 1.13em;
+    color: #1769aa;
+  }
+  #id1 .fbd-section .highlight {
+    background: #e9f6ff;
+    padding: 0.2em 0.5em;
+    border-radius: 6px;
+  }
+  #id1 .fbd-section .def-list {
+    margin-left: 1em;
+  }
+  #id1 .fbd-section .def-list dt {
+    font-weight: bold;
+    color: #054a91;
+    margin-top: 1em;
+  }
+  #id1 .fbd-section .def-list dd {
+    margin-bottom: 0.6em;
+    margin-left: 0;
+  }
+  #id1 .fbd-section .eqn {
+    background: #f3f7fa;
+    padding: 0.15em 0.6em;
+    border-radius: 5px;
+    color: #0c395c;
+    font-family: 'Consolas', monospace;
+    font-size: 1.08em;
+    margin: 0.1em 0.2em;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  #id1 .fbd-diagram-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin: 32px 0 24px 0;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  #id1 .fbd-diagram-card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 3px 12px rgba(28, 52, 93, 0.09);
+    padding: 20px;
+    width: 390px;
+    min-height: 340px;
+    margin-bottom: 14px;
+    position: relative;
+    transition: box-shadow 0.2s;
+  }
+  #id1 .fbd-diagram-card:hover {
+    box-shadow: 0 4px 24px rgba(28, 52, 93, 0.16);
+  }
+  #id1 .fbd-diagram-title {
+    text-align: center;
+    font-weight: bold;
+    color: #2360a4;
+    font-size: 1.08em;
+    margin-bottom: 6px;
+  }
+  #id1 .fbd-css-diagram {
+    position: relative;
+    background: #e9ecef;
+    border-radius: 4px;
+    width: 340px;
+    height: 210px;
+    margin: 0 auto 8px auto;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  }
+  #id1 .fbd-diagram-desc {
+    color: #43607e;
+    font-size: 0.96em;
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 0;
+    min-height: 2.5em;
+  }
+  /* Block on Surface FBD */
+  #id1 .block { position:absolute; left:110px; top:85px; width:120px; height:60px;
+    background:#7db6e8; border-radius:6px; border:2.5px solid #4d87ac; z-index: 1;}
+  #id1 .ground { position: absolute; left: 60px; top: 145px; width: 220px; height: 0;
+    border-bottom: 3px solid #444; z-index: 0;}
+  #id1 .block-shadow {
+    position: absolute; left: 112px; top: 145px; width: 116px; height: 10px;
+    background: rgba(80,80,80,0.11); border-radius: 30% 30% 70% 70% / 50% 50% 90% 90%;
+    z-index: 0;
+  }
+  .arrow { position: absolute; width: 0; height: 0;}
+  .arrow-w {
+    left: 167px; top: 145px; border-left: 0 solid transparent;
+    border-right: 0 solid transparent; border-top: 40px solid #c0392b;
+  }
+  .arrow-w::after {
+    content: ""; position: absolute; left: -7px; top: 38px;
+    border-left: 10px solid transparent; border-right: 10px solid transparent;
+    border-top: 16px solid #c0392b;
+  }
+  .label-w {
+    position: absolute; left: 185px; top: 178px; color: #c0392b;
+    font-weight: bold; font-size: 18px; user-select:none;
+  }
+  .arrow-n {
+    left: 177px; top: 83px; border-left: 0 solid transparent;
+    border-right: 0 solid transparent; border-bottom: 32px solid #27ae60;
+  }
+  .arrow-n::after {
+    content: ""; position: absolute; left: -7px; top: -17px;
+    border-left: 10px solid transparent; border-right: 10px solid transparent;
+    border-bottom: 16px solid #27ae60;
+  }
+  .label-n {
+    position: absolute; left: 195px; top: 85px; color: #27ae60;
+    font-weight: bold; font-size: 18px; user-select:none;
+  }
+  .arrow-f {
+    left: 110px; top: 120px; width: 40px; height: 0;
+    border-bottom: 4px solid #f39c12; transform: rotate(180deg);
+  }
+  .arrow-f::after {
+    content: ""; position: absolute; right: 37px; top: -8px;
+    border-top: 8px solid transparent; border-bottom: 8px solid transparent;
+    border-right: 13px solid #f39c12;
+  }
+  .label-f {
+    position: absolute; left: 75px; top: 108px; color: #f39c12;
+    font-weight: bold; font-size: 18px; user-select:none;
+  }
+  .arrow-p {
+    left: 225px; top: 142px; width: 65px; height: 0;
+    border-bottom: 4px solid #2980b9; transform: rotate(-30deg);
+  }
+  .arrow-p::after {
+    content: ""; position: absolute; right: -12px; top: -8px;
+    border-top: 8px solid transparent; border-bottom: 8px solid transparent;
+    border-left: 16px solid #2980b9; transform: rotate(30deg);
+  }
+  .label-p {
+    position: absolute; left: 295px; top: 112px; color: #2980b9;
+    font-weight: bold; font-size: 18px; user-select:none;
+  }
+  /* Inclined Plane */
+  #id1 .inclined-plane {
+    position: absolute; left: 30px; top: 90px; width: 210px; height: 80px;
+    background: linear-gradient(114deg,#c2d8e9 70%,transparent 70%);
+    border-bottom: 5px solid #34597a;
+    border-right: 5px solid #34597a;
+    transform: skew(-25deg,0deg);
+    z-index: 0;
+  }
+  #id1 .block-incline {
+    position: absolute; left: 120px; top: 105px; width: 70px; height: 35px;
+    background: #8fbbe3; border-radius: 5px; border: 2px solid #4d87ac; z-index: 1;
+    transform: skew(-25deg,0deg) rotate(25deg);
+  }
+  .arrow-w2 {
+    left: 151px; top: 130px; border-left: 0; border-right: 0; border-top: 55px solid #c0392b;
+  }
+  .arrow-w2::after { content: ""; position: absolute; left: -7px; top: 53px;
+    border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 14px solid #c0392b;
+  }
+  .label-w2 { position: absolute; left: 158px; top: 183px; color: #c0392b; font-weight: bold; font-size: 16px; user-select:none;}
+  .arrow-n2 {
+    left: 180px; top: 120px; width: 0; height: 50px;
+    border-right: 5px solid #27ae60; border-bottom: 0 solid transparent; transform: rotate(-25deg);
+  }
+  .arrow-n2::after {
+    content: ""; position: absolute; left: 2px; top: 0px;
+    border-top: 8px solid transparent; border-bottom: 8px solid transparent;
+    border-left: 13px solid #27ae60; transform: rotate(25deg);
+  }
+  .label-n2 { position: absolute; left: 200px; top: 110px; color: #27ae60; font-weight: bold; font-size: 16px; user-select:none;}
+  .arrow-f2 {
+    left: 180px; top: 134px; width: 45px; height: 0; border-bottom: 4px solid #f39c12; transform: rotate(-25deg);
+  }
+  .arrow-f2::after {
+    content: ""; position: absolute; right: -13px; top: -8px;
+    border-top: 8px solid transparent; border-bottom: 8px solid transparent;
+    border-left: 14px solid #f39c12; transform: rotate(25deg);
+  }
+  .label-f2 { position: absolute; left: 220px; top: 118px; color: #f39c12; font-weight: bold; font-size: 16px; user-select:none;}
+  .arrow-p2 {
+    left: 120px; top: 105px; width: 55px; height: 0; border-bottom: 4px solid #2980b9;
+    transform: rotate(-25deg);
+  }
+  .arrow-p2::after {
+    content: ""; position: absolute; right: -10px; top: -6px;
+    border-top: 8px solid transparent; border-bottom: 8px solid transparent;
+    border-left: 13px solid #2980b9; transform: rotate(25deg);
+  }
+  .label-p2 { position: absolute; left: 110px; top: 90px; color: #2980b9; font-weight: bold; font-size: 16px; user-select:none;}
+  /* Pulley System */
+  #id1 .pulley {
+    position: absolute; left: 160px; top: 35px; width: 40px; height: 40px;
+    border-radius: 50%; border: 6px solid #3b4c6b; background: #e8eaf6; z-index: 1;
+  }
+  #id1 .pulley-rope-l { position: absolute; left: 180px; top: 75px; width: 4px; height: 55px; background: #b3b3b3; }
+  #id1 .pulley-rope-r { position: absolute; left: 200px; top: 75px; width: 4px; height: 55px; background: #b3b3b3; }
+  #id1 .pulley-block-l {
+    position: absolute; left: 170px; top: 130px; width: 18px; height: 32px;
+    background: #7db6e8; border-radius: 4px; border: 2px solid #4d87ac; z-index: 1;
+  }
+  #id1 .pulley-block-r {
+    position: absolute; left: 190px; top: 130px; width: 18px; height: 32px;
+    background: #e1ad5d; border-radius: 4px; border: 2px solid #b78a3c; z-index: 1;
+  }
+  .arrow-pulley-wl {
+    left: 178px; top: 162px; border-left: 0; border-right: 0; border-top: 30px solid #c0392b;
+  }
+  .arrow-pulley-wl::after { content: ""; position: absolute; left:-7px; top:28px; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 13px solid #c0392b;}
+  .label-pulley-wl { position:absolute; left:183px; top:192px; color:#c0392b; font-weight:bold; font-size:15px;}
+  .arrow-pulley-wr {
+    left: 198px; top: 162px; border-left: 0; border-right: 0; border-top: 30px solid #c0392b;
+  }
+  .arrow-pulley-wr::after { content: ""; position: absolute; left:-7px; top:28px; border-left: 8px solid transparent; border-right: 8px solid transparent; border-top: 13px solid #c0392b;}
+  .label-pulley-wr { position:absolute; left:203px; top:192px; color:#c0392b; font-weight:bold; font-size:15px;}
+  .arrow-pulley-tl {
+    left: 185px; top: 130px; width: 0; height: 32px; border-right: 3px solid #1769aa; border-bottom: 0; transform: none;
+  }
+  .arrow-pulley-tl::after {
+    content: ""; position: absolute; right:-7px; top:0px; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 11px solid #1769aa;
+  }
+  .label-pulley-tl { position:absolute; left:167px; top:110px; color:#1769aa; font-weight:bold; font-size:15px;}
+  .arrow-pulley-tr {
+    left: 205px; top: 130px; width: 0; height: 32px; border-right: 3px solid #1769aa; border-bottom: 0; transform: none;
+  }
+  .arrow-pulley-tr::after {
+    content: ""; position: absolute; right:-7px; top:0px; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 11px solid #1769aa;
+  }
+  .label-pulley-tr { position:absolute; left:215px; top:110px; color:#1769aa; font-weight:bold; font-size:15px;}
+  #id1 .faded {
+    opacity: 0.6;
+    filter: grayscale(0.3);
+  }
+</style>
 
-  <div class="section">
-    <h2>2. Types of Forces in FBDs</h2>
-    <dl class="def-list">
-      <dt>1. Applied Force (<span class="eqn">F</span> or <span class="eqn">P</span>)</dt>
-      <dd>Any external force applied to the body, such as a push, pull, or tension.</dd>
-      <dt>2. Gravitational Force (<span class="eqn">W = mg</span>)</dt>
-      <dd>Weight of the body, always acts vertically downward towards the center of the Earth.</dd>
-      <dt>3. Normal Reaction (<span class="eqn">N</span>)</dt>
-      <dd>Perpendicular contact force from a surface supporting the body; acts away from the surface.</dd>
-      <dt>4. Frictional Force (<span class="eqn">f = \mu N</span>)</dt>
-      <dd>Resists relative motion between surfaces; acts parallel to the plane of contact and opposite to the direction of motion or intended motion.</dd>
-      <dt>5. Tension (<span class="eqn">T</span>)</dt>
-      <dd>Force transmitted through a string, rope, or cable when pulled tight by forces acting from opposite ends.</dd>
-      <dt>6. Spring Force (<span class="eqn">F_s = kx</span>)</dt>
-      <dd>Force exerted by a compressed or stretched spring, proportional to the displacement from equilibrium.</dd>
-      <dt>7. Reaction at Supports</dt>
-      <dd>For beams or structures: <b>Hinges</b> provide two reactions, <b>Rollers</b> provide one normal reaction, <b>Fixed supports</b> provide two force reactions and a moment.</dd>
-      <dt>8. Moment or Couple (<span class="eqn">M = F \times d</span>)</dt>
-      <dd>Tendency of a force to rotate a body about a point or axis.</dd>
-    </dl>
-  </div>
+<div class="fbd-section">
+  <h2>What is a Free Body Diagram?</h2>
+  <p>
+    <span class="highlight">A Free Body Diagram (FBD)</span> is a graphical illustration used in physics and engineering to visualize the applied forces, moments, and reactions acting on a single object or system. It is a cornerstone tool in the analysis of statics, dynamics, and mechanics of materials.
+  </p>
+  <ul>
+    <li><strong>Purpose:</strong> To isolate a body and represent all external forces and moments acting on it, making it easier to apply equilibrium equations.</li>
+    <li><strong>Applications:</strong> Statics, dynamics, structural analysis, mechanical design, GATE/IES/PSU exams, and real-world engineering problems.</li>
+  </ul>
 
-  <div class="section">
-    <h2>3. How to Draw an FBD (Step-by-Step)</h2>
-    <ol>
-      <li><b>Isolate the body:</b> Remove the object from its surroundings.</li>
-      <li><b>Replace supports/connections</b> with their reaction forces and moments.</li>
-      <li><b>Show all applied forces:</b> Include weight, applied loads, friction, tension, etc.</li>
-      <li><b>Indicate line of action and direction</b> for every force.</li>
-      <li><b>Label all known & unknown forces</b> clearly.</li>
-      <li><b>Draw a neat, proportionate sketch</b> for clarity and calculations.</li>
-    </ol>
-  </div>
+  <h2>Types of Forces in FBDs</h2>
+  <dl class="def-list">
+    <dt>1. Applied Force (<span class="eqn">F</span> or <span class="eqn">P</span>)</dt>
+    <dd>Any external force applied to the body, such as a push, pull, or tension.</dd>
+    <dt>2. Gravitational Force (<span class="eqn">W = mg</span>)</dt>
+    <dd>Weight of the body, always acts vertically downward towards the center of the Earth.</dd>
+    <dt>3. Normal Reaction (<span class="eqn">N</span>)</dt>
+    <dd>Perpendicular contact force from a surface supporting the body; acts away from the surface.</dd>
+    <dt>4. Frictional Force (<span class="eqn">f = μ N</span>)</dt>
+    <dd>Resists relative motion between surfaces; acts parallel to the plane of contact and opposite to the direction of motion or intended motion.</dd>
+    <dt>5. Tension (<span class="eqn">T</span>)</dt>
+    <dd>Force transmitted through a string, rope, or cable when pulled tight by forces acting from opposite ends.</dd>
+    <dt>6. Spring Force (<span class="eqn">F_s = kx</span>)</dt>
+    <dd>Force exerted by a compressed or stretched spring, proportional to the displacement from equilibrium.</dd>
+    <dt>7. Reaction at Supports</dt>
+    <dd>For beams or structures: <b>Hinges</b> provide two reactions, <b>Rollers</b> provide one normal reaction, <b>Fixed supports</b> provide two force reactions and a moment.</dd>
+    <dt>8. Moment or Couple (<span class="eqn">M = F × d</span>)</dt>
+    <dd>Tendency of a force to rotate a body about a point or axis.</dd>
+  </dl>
 
-  <div class="section">
-    <h2>4. Common FBD Scenarios & CSS Diagrams</h2>
-    <div class="diagram-section">
-      <!-- Block on horizontal surface -->
-      <div class="diagram-card">
-        <div class="diagram-title">Block on Horizontal Surface</div>
-        <div class="fbd-css-diagram" id="fbd1">
-          <div class="ground"></div>
-          <div class="block-shadow"></div>
-          <div class="block"></div>
-          <div class="arrow arrow-w"></div>
-          <div class="arrow arrow-n"></div>
-          <div class="arrow arrow-f"></div>
-          <div class="arrow arrow-p"></div>
-          <span class="label-w">W</span>
-          <span class="label-n">N</span>
-          <span class="label-f">f</span>
-          <span class="label-p">P</span>
-        </div>
-        <div class="diagram-desc">P: Applied force<br>N: Normal reaction<br>W: Weight<br>f: Friction</div>
+  <h2>How to Draw an FBD (Step-by-Step)</h2>
+  <ol>
+    <li><b>Isolate the body:</b> Remove the object from its surroundings.</li>
+    <li><b>Replace supports/connections</b> with their reaction forces and moments.</li>
+    <li><b>Show all applied forces:</b> Include weight, applied loads, friction, tension, etc.</li>
+    <li><b>Indicate line of action and direction</b> for every force.</li>
+    <li><b>Label all known & unknown forces</b> clearly.</li>
+    <li><b>Draw a neat, proportionate sketch</b> for clarity and calculations.</li>
+  </ol>
+
+  <h2>Common FBD Scenarios & CSS Diagrams</h2>
+  <div class="fbd-diagram-section">
+    <!-- Block on horizontal surface -->
+    <div class="fbd-diagram-card">
+      <div class="fbd-diagram-title">Block on Horizontal Surface</div>
+      <div class="fbd-css-diagram">
+        <div class="ground"></div>
+        <div class="block-shadow"></div>
+        <div class="block"></div>
+        <div class="arrow arrow-w"></div>
+        <div class="arrow arrow-n"></div>
+        <div class="arrow arrow-f"></div>
+        <div class="arrow arrow-p"></div>
+        <span class="label-w">W</span>
+        <span class="label-n">N</span>
+        <span class="label-f">f</span>
+        <span class="label-p">P</span>
       </div>
-      <!-- Block on Inclined Plane -->
-      <div class="diagram-card">
-        <div class="diagram-title">Block on Inclined Plane</div>
-        <div class="fbd-css-diagram" id="fbd2">
-          <div class="inclined-plane"></div>
-          <div class="block-incline"></div>
-          <div class="arrow arrow-w2"></div>
-          <div class="arrow arrow-n2"></div>
-          <div class="arrow arrow-f2"></div>
-          <div class="arrow arrow-p2"></div>
-          <span class="label-w2">W</span>
-          <span class="label-n2">N</span>
-          <span class="label-f2">f</span>
-          <span class="label-p2">P</span>
-        </div>
-        <div class="diagram-desc">Block of mass m on incline θ.<br>
-          W: Weight <br>
-          N: Normal reaction <br>
-          f: Friction (down the incline if block tends to move up) <br>
-          P: Applied force (up the incline)</div>
+      <div class="fbd-diagram-desc">P: Applied force<br>N: Normal reaction<br>W: Weight<br>f: Friction</div>
+    </div>
+    <!-- Block on Inclined Plane -->
+    <div class="fbd-diagram-card">
+      <div class="fbd-diagram-title">Block on Inclined Plane</div>
+      <div class="fbd-css-diagram">
+        <div class="inclined-plane"></div>
+        <div class="block-incline"></div>
+        <div class="arrow arrow-w2"></div>
+        <div class="arrow arrow-n2"></div>
+        <div class="arrow arrow-f2"></div>
+        <div class="arrow arrow-p2"></div>
+        <span class="label-w2">W</span>
+        <span class="label-n2">N</span>
+        <span class="label-f2">f</span>
+        <span class="label-p2">P</span>
       </div>
-      <!-- Pulley System -->
-      <div class="diagram-card">
-        <div class="diagram-title">Simple Pulley System</div>
-        <div class="fbd-css-diagram" id="fbd3">
-          <div class="pulley"></div>
-          <div class="pulley-rope-l"></div>
-          <div class="pulley-rope-r"></div>
-          <div class="pulley-block-l"></div>
-          <div class="pulley-block-r"></div>
-          <div class="arrow arrow-pulley-wl"></div>
-          <div class="arrow arrow-pulley-wr"></div>
-          <div class="arrow arrow-pulley-tl"></div>
-          <div class="arrow arrow-pulley-tr"></div>
-          <span class="label-pulley-wl">W₁</span>
-          <span class="label-pulley-wr">W₂</span>
-          <span class="label-pulley-tl">T</span>
-          <span class="label-pulley-tr">T</span>
-        </div>
-        <div class="diagram-desc">Two masses m₁, m₂ connected via a pulley.<br>
-          W₁, W₂: Weights<br>
-          T: Tension in rope</div>
+      <div class="fbd-diagram-desc">Block of mass m on incline θ.<br>
+        W: Weight <br>
+        N: Normal reaction <br>
+        f: Friction (down the incline if block tends to move up) <br>
+        P: Applied force (up the incline)</div>
+    </div>
+    <!-- Pulley System -->
+    <div class="fbd-diagram-card">
+      <div class="fbd-diagram-title">Simple Pulley System</div>
+      <div class="fbd-css-diagram">
+        <div class="pulley"></div>
+        <div class="pulley-rope-l"></div>
+        <div class="pulley-rope-r"></div>
+        <div class="pulley-block-l"></div>
+        <div class="pulley-block-r"></div>
+        <div class="arrow arrow-pulley-wl"></div>
+        <div class="arrow arrow-pulley-wr"></div>
+        <div class="arrow arrow-pulley-tl"></div>
+        <div class="arrow arrow-pulley-tr"></div>
+        <span class="label-pulley-wl">W₁</span>
+        <span class="label-pulley-wr">W₂</span>
+        <span class="label-pulley-tl">T</span>
+        <span class="label-pulley-tr">T</span>
       </div>
+      <div class="fbd-diagram-desc">Two masses m₁, m₂ connected via a pulley.<br>
+        W₁, W₂: Weights<br>
+        T: Tension in rope</div>
     </div>
   </div>
 
-  <div class="section">
-    <h2>5. Equilibrium Equations</h2>
-    <ul>
-      <li>For a rigid body in <b>2D equilibrium</b>:
-        <div class="eqn">∑Fₓ = 0</div>
-        <div class="eqn">∑Fᵧ = 0</div>
-        <div class="eqn">∑M_z = 0</div>
-      </li>
-      <li>For a rigid body in <b>3D equilibrium</b>:
-        <div class="eqn">∑Fₓ = 0</div>
-        <div class="eqn">∑Fᵧ = 0</div>
-        <div class="eqn">∑F_z = 0</div>
-        <div class="eqn">∑Mₓ = 0</div>
-        <div class="eqn">∑Mᵧ = 0</div>
-        <div class="eqn">∑M_z = 0</div>
-      </li>
-    </ul>
-    <p>
-      <b>To solve FBD problems:</b> Write equilibrium equations, substitute known values, and solve for unknowns such as reactions, tensions, or applied forces.
-    </p>
+  <h2>Equilibrium Equations</h2>
+  <ul>
+    <li>For a rigid body in <b>2D equilibrium</b>:
+      <div class="eqn">∑Fₓ = 0</div>
+      <div class="eqn">∑Fᵧ = 0</div>
+      <div class="eqn">∑M_z = 0</div>
+    </li>
+    <li>For a rigid body in <b>3D equilibrium</b>:
+      <div class="eqn">∑Fₓ = 0</div>
+      <div class="eqn">∑Fᵧ = 0</div>
+      <div class="eqn">∑F_z = 0</div>
+      <div class="eqn">∑Mₓ = 0</div>
+      <div class="eqn">∑Mᵧ = 0</div>
+      <div class="eqn">∑M_z = 0</div>
+    </li>
+  </ul>
+  <p>
+    <b>To solve FBD problems:</b> Write equilibrium equations, substitute known values, and solve for unknowns such as reactions, tensions, or applied forces.
+  </p>
+
+  <h2>Example Problems & Solutions</h2>
+  <!-- Example 1 -->
+  <div style="background: #f9fcfe; border-left: 5px solid #3498db; padding: 14px 18px 9px 18px; margin: 18px 0 22px 0; border-radius: 7px;">
+    <div style="color: #24598c; font-weight: bold; margin-bottom: 8px; font-size: 1.05em; border-bottom: 1px solid #d0e4f7; padding-bottom: 2px;">
+      Example 1: Block on a Horizontal Surface with Friction
+    </div>
+    <div><b>Problem:</b> A block of mass 20 kg rests on a rough horizontal surface (μ = 0.25). What minimum horizontal force P is required to just start moving the block?</div>
+    <div><b>Solution:</b></div>
+    <div>1. <b>Draw FBD:</b> Forces are Weight W (down), Normal N (up), Friction f (left), Applied force P (right).</div>
+    <div>2. <b>Equilibrium in Y:</b>
+      <span class="eqn">N - W = 0 ⇒ N = W = mg = 20 × 9.81 = 196.2 N</span>
+    </div>
+    <div>3. <b>Friction force:</b>
+      <span class="eqn">f = μN = 0.25 × 196.2 = 49.05 N</span>
+    </div>
+    <div>4. <b>Equilibrium in X:</b>
+      <span class="eqn">P = f = 49.05 N</span>
+    </div>
+    <div><b>Answer:</b> The minimum force P required = <b>49.05 N</b></div>
+  </div>
+  <!-- Example 2 -->
+  <div style="background: #f9fcfe; border-left: 5px solid #3498db; padding: 14px 18px 9px 18px; margin: 18px 0 22px 0; border-radius: 7px;">
+    <div style="color: #24598c; font-weight: bold; margin-bottom: 8px; font-size: 1.05em; border-bottom: 1px solid #d0e4f7; padding-bottom: 2px;">
+      Example 2: Block on Inclined Plane
+    </div>
+    <div><b>Problem:</b> Block of mass 10 kg on a 30° incline, μ = 0.2. What force P parallel to the incline is needed to move it up at constant speed?</div>
+    <div>1. <b>Draw FBD:</b> Forces along and perpendicular to incline: Weight W, Normal N, Friction f, Applied force P.</div>
+    <div>2. <b>Resolve W:</b>
+      <span class="eqn">W = mg = 98.1 N</span>.
+      <span class="eqn">Wₓ = W sinθ = 98.1 × 0.5 = 49.05 N</span> (down the incline).
+      <span class="eqn">Wᵧ = W cosθ = 98.1 × 0.866 = 84.96 N</span> (perpendicular to plane).
+    </div>
+    <div>3. <b>Normal reaction:</b>
+      <span class="eqn">N = Wᵧ = 84.96 N</span>
+    </div>
+    <div>4. <b>Friction:</b>
+      <span class="eqn">f = μN = 0.2 × 84.96 = 16.99 N</span>
+    </div>
+    <div>5. <b>Equilibrium along incline:</b>
+      <span class="eqn">P = Wₓ + f = 49.05 + 16.99 = 66.04 N</span>
+    </div>
+    <div><b>Answer:</b> The force required <b>P = 66.04 N</b></div>
+  </div>
+  <!-- Example 3 -->
+  <div style="background: #f9fcfe; border-left: 5px solid #3498db; padding: 14px 18px 9px 18px; margin: 18px 0 22px 0; border-radius: 7px;">
+    <div style="color: #24598c; font-weight: bold; margin-bottom: 8px; font-size: 1.05em; border-bottom: 1px solid #d0e4f7; padding-bottom: 2px;">
+      Example 3: Pulley System
+    </div>
+    <div><b>Problem:</b> Two masses, m₁ = 5 kg and m₂ = 3 kg, suspended on either side of a frictionless, massless pulley. Find the acceleration and tension in the string.</div>
+    <div><b>Solution:</b>
+      <ul>
+        <li><b>FBD for m₁:</b> T (up), W₁ = m₁g (down)</li>
+        <li><b>FBD for m₂:</b> T (up), W₂ = m₂g (down)</li>
+      </ul>
+      <div class="eqn">m₁g - T = m₁a</div>
+      <div class="eqn">T - m₂g = m₂a</div>
+    </div>
+    <div>Add equations:
+      <div class="eqn">m₁g - m₂g = (m₁ + m₂)a</div>
+      <div class="eqn">a = (m₁ - m₂)g / (m₁ + m₂) = (5-3)×9.81 / (5+3) = 2.45 m/s²</div>
+    </div>
+    <div>Tension:
+      <div class="eqn">T = m₂(g + a) = 3 × (9.81 + 2.45) = 36.78 N</div>
+    </div>
+    <div><b>Answers:</b> Acceleration = <b>2.45 m/s²</b>, Tension = <b>36.78 N</b></div>
   </div>
 
-  <div class="section">
-    <h2>6. Example Problems & Solutions</h2>
-    <!-- Example 1 -->
-    <div class="sol-section">
-      <div class="sol-title">Example 1: Block on a Horizontal Surface with Friction</div>
-      <div class="step"><b>Problem:</b> A block of mass 20 kg rests on a rough horizontal surface (μ = 0.25). What minimum horizontal force P is required to just start moving the block?</div>
-      <div class="step"><b>Solution:</b></div>
-      <div class="step">1. <b>Draw FBD:</b> Forces are Weight W (down), Normal N (up), Friction f (left), Applied force P (right).</div>
-      <div class="step">2. <b>Equilibrium in Y:</b>
-        <span class="eqn">N - W = 0 ⇒ N = W = mg = 20 × 9.81 = 196.2 N</span>
-      </div>
-      <div class="step">3. <b>Friction force:</b>
-        <span class="eqn">f = μN = 0.25 × 196.2 = 49.05 N</span>
-      </div>
-      <div class="step">4. <b>Equilibrium in X:</b>
-        <span class="eqn">P = f = 49.05 N</span>
-      </div>
-      <div class="step"><b>Answer:</b> The minimum force P required = <b>49.05 N</b></div>
-    </div>
-    <!-- Example 2 -->
-    <div class="sol-section">
-      <div class="sol-title">Example 2: Block on Inclined Plane</div>
-      <div class="step"><b>Problem:</b> Block of mass 10 kg on a 30° incline, μ = 0.2. What force P parallel to the incline is needed to move it up at constant speed?</div>
-      <div class="step">1. <b>Draw FBD:</b> Forces along and perpendicular to incline: Weight W, Normal N, Friction f, Applied force P.</div>
-      <div class="step">2. <b>Resolve W:</b>
-        <span class="eqn">W = mg = 98.1 N</span>.
-        <span class="eqn">Wₓ = W sinθ = 98.1 × 0.5 = 49.05 N</span> (down the incline).
-        <span class="eqn">Wᵧ = W cosθ = 98.1 × 0.866 = 84.96 N</span> (perpendicular to plane).
-      </div>
-      <div class="step">3. <b>Normal reaction:</b>
-        <span class="eqn">N = Wᵧ = 84.96 N</span>
-      </div>
-      <div class="step">4. <b>Friction:</b>
-        <span class="eqn">f = μN = 0.2 × 84.96 = 16.99 N</span>
-      </div>
-      <div class="step">5. <b>Equilibrium along incline:</b>
-        <span class="eqn">P = Wₓ + f = 49.05 + 16.99 = 66.04 N</span>
-      </div>
-      <div class="step"><b>Answer:</b> The force required <b>P = 66.04 N</b></div>
-    </div>
-    <!-- Example 3 -->
-    <div class="sol-section">
-      <div class="sol-title">Example 3: Pulley System</div>
-      <div class="step"><b>Problem:</b> Two masses, m₁ = 5 kg and m₂ = 3 kg, suspended on either side of a frictionless, massless pulley. Find the acceleration and tension in the string.</div>
-      <div class="step"><b>Solution:</b>
-        <ul>
-          <li><b>FBD for m₁:</b> T (up), W₁ = m₁g (down)</li>
-          <li><b>FBD for m₂:</b> T (up), W₂ = m₂g (down)</li>
-        </ul>
-        <div class="eqn">m₁g - T = m₁a</div>
-        <div class="eqn">T - m₂g = m₂a</div>
-      </div>
-      <div class="step">Add equations:
-        <div class="eqn">m₁g - m₂g = (m₁ + m₂)a</div>
-        <div class="eqn">a = (m₁ - m₂)g / (m₁ + m₂) = (5-3)×9.81 / (5+3) = 2.45 m/s²</div>
-      </div>
-      <div class="step">Tension:
-        <div class="eqn">T = m₂(g + a) = 3 × (9.81 + 2.45) = 36.78 N</div>
-      </div>
-      <div class="step"><b>Answers:</b> Acceleration = <b>2.45 m/s²</b>, Tension = <b>36.78 N</b></div>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2>7. Advanced Tips & Common Mistakes</h2>
-    <ul>
-      <li>Always draw FBD before writing equations.</li>
-      <li>For unknown support reactions, assume direction; negative value only means opposite direction.</li>
-      <li>For multiple bodies, draw separate FBDs for each.</li>
-      <li>Show all forces acting <b>on the body</b>, not forces the body exerts on others.</li>
-      <li>Include all action-reaction pairs for interconnected bodies.</li>
-      <li>For equilibrium, do not forget to consider moments about a point.</li>
-    </ul>
-  </div>
-</main>
-</body>
-</html>"
+  <h2>Advanced Tips & Common Mistakes</h2>
+  <ul>
+    <li>Always draw FBD before writing equations.</li>
+    <li>For unknown support reactions, assume direction; negative value only means opposite direction.</li>
+    <li>For multiple bodies, draw separate FBDs for each.</li>
+    <li>Show all forces acting <b>on the body</b>, not forces the body exerts on others.</li>
+    <li>Include all action-reaction pairs for interconnected bodies.</li>
+    <li>For equilibrium, do not forget to consider moments about a point.</li>
+  </ul>
+</div>"
       },
       {
         id: "id2",
